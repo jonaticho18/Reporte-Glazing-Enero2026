@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADHD Services Meta Ads Report | January 2026</title>
+  <style>
+    :root{
+      --bg0:#070A12;
+      --card:#0B1220;
+      --card2:#0E1930;
+      --text:#EAF0FF;
+      --muted:#A9B4D0;
+
+      --cyan:#22D3EE;
+      --blue:#60A5FA;
+      --purple:#A78BFA;
+      --pink:#FB7185;
+      --amber:#FBBF24;
+      --green:#34D399;
+      --red:#F87171;
+
+      --grid:rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(34,211,238,.20), transparent 60%),
+                  radial-gradient(900px 500px at 80% 10%, rgba(167,139,250,.18), transparent 55%),
+                  radial-gradient(900px 600px at 40% 100%, rgba(251,191,36,.12), transparent 60%),
+                  var(--bg0);
+      color:var(--text);
+    }
+    a{color:var(--cyan);text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+    header{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
+      padding:18px 18px 12px;
+      background: linear-gradient(135deg, rgba(34,211,238,.12), rgba(167,139,250,.10));
+      border:1px solid var(--grid);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .title h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .title p{margin:6px 0 0;color:var(--muted);line-height:1.35}
+    .pill{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid var(--grid);
+      background: rgba(11,18,32,.55);
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .dot{width:10px;height:10px;border-radius:50%}
+    .dot.cyan{background:var(--cyan)}
+    .dot.amber{background:var(--amber)}
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid var(--grid);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px 16px 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .card h2{margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:650}
+    .kpi{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
+      margin-top:8px;
+    }
+    .kpi .value{font-size:28px;font-weight:800;letter-spacing:.2px}
+    .kpi .sub{font-size:12px;color:var(--muted);text-align:right}
+    .accent{
+      position:absolute;inset:auto -40px -40px auto;
+      width:180px;height:180px;border-radius:50%;
+      filter: blur(2px);
+      opacity:.18;
+    }
+    .accent.cyan{background:var(--cyan)}
+    .accent.purple{background:var(--purple)}
+    .accent.amber{background:var(--amber)}
+    .accent.green{background:var(--green)}
+    .accent.pink{background:var(--pink)}
+    .span-3{grid-column: span 3}
+    .span-4{grid-column: span 4}
+    .span-5{grid-column: span 5}
+    .span-6{grid-column: span 6}
+    .span-7{grid-column: span 7}
+    .span-8{grid-column: span 8}
+    .span-12{grid-column: span 12}
+
+    .twoCol{display:grid;grid-template-columns: 1.15fr .85fr; gap:14px}
+    @media (max-width: 980px){
+      .span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column: span 12}
+      .twoCol{grid-template-columns: 1fr}
+      header{flex-direction:column}
+    }
+
+    .divider{height:1px;background:var(--grid);margin:12px 0}
+    .note{color:var(--muted);font-size:12px;line-height:1.45;margin:0}
+
+    table{width:100%;border-collapse:collapse;margin-top:8px}
+    th,td{
+      padding:10px 10px;
+      border-bottom:1px solid var(--grid);
+      text-align:left;
+      font-size:13px;
+    }
+    th{color:var(--muted);font-weight:700}
+    td{color:var(--text)}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--grid);
+      background: rgba(255,255,255,.03);
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      white-space:nowrap;
+    }
+    .badge{
+      width:8px;height:8px;border-radius:50%;
+      display:inline-block;
+    }
+
+    .bar{
+      height:10px;border-radius:999px;background: rgba(255,255,255,.06);overflow:hidden;border:1px solid var(--grid)
+    }
+    .bar > div{height:100%}
+    .muted{color:var(--muted)}
+
+    .chart{
+      width:100%;
+      height:260px;
+      display:block;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
+      border:1px solid var(--grid);
+      border-radius: 16px;
+      padding:10px;
+    }
+
+    footer{margin-top:16px;color:var(--muted);font-size:12px}
+    .small{font-size:12px;color:var(--muted)}
+    .h3{margin:0 0 8px;font-size:16px}
+    .callout{
+      padding:12px 12px;
+      border:1px dashed rgba(34,211,238,.35);
+      background: rgba(34,211,238,.06);
+      border-radius: 14px;
+      color: var(--text);
+      font-size:13px;
+      line-height:1.45;
+    }
+    .list{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.55}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>ADHD Services Meta Ads Report | January 2026</h1>
+        <p>
+          Campaign: <strong>ABO | ADHD Followers campaign | 01-07</strong><br/>
+          Reporting window: <strong>Jan 6 to Jan 31, 2026</strong>
+        </p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <div class="pill"><span class="dot cyan"></span> Data source: Meta Ads exports</div>
+        <div class="pill"><span class="dot amber"></span> Followers: Instagram profile snapshots</div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card span-3">
+        <h2>Total Ad Spend</h2>
+        <div class="kpi">
+          <div class="value">€121.63</div>
+          <div class="sub">Currency: EUR</div>
+        </div>
+        <div class="accent cyan"></div>
+      </div>
+
+      <div class="card span-3">
+        <h2>Reach</h2>
+        <div class="kpi">
+          <div class="value">10,126</div>
+          <div class="sub">Unique people</div>
+        </div>
+        <div class="accent purple"></div>
+      </div>
+
+      <div class="card span-3">
+        <h2>Impressions</h2>
+        <div class="kpi">
+          <div class="value">16,836</div>
+          <div class="sub">Total views</div>
+        </div>
+        <div class="accent amber"></div>
+      </div>
+
+      <div class="card span-3">
+        <h2>Frequency</h2>
+        <div class="kpi">
+          <div class="value">1.66</div>
+          <div class="sub">Impressions per person</div>
+        </div>
+        <div class="accent green"></div>
+      </div>
+
+      <div class="card span-4">
+        <h2>CTR All</h2>
+        <div class="kpi">
+          <div class="value">5.31%</div>
+          <div class="sub">All clicks per impression</div>
+        </div>
+        <p class="note">High for a follower and awareness style objective.</p>
+        <div class="accent cyan"></div>
+      </div>
+
+      <div class="card span-4">
+        <h2>Results</h2>
+        <div class="kpi">
+          <div class="value">780</div>
+          <div class="sub">Result type: profile visit view</div>
+        </div>
+        <p class="note">This campaign optimized for profile visits, not purchases.</p>
+        <div class="accent purple"></div>
+      </div>
+
+      <div class="card span-4">
+        <h2>Cost per Result</h2>
+        <div class="kpi">
+          <div class="value">€0.16</div>
+          <div class="sub">Spend divided by results</div>
+        </div>
+        <p class="note">Efficient cost for top of funnel traffic to the profile.</p>
+        <div class="accent amber"></div>
+      </div>
+
+      <div class="card span-6">
+        <h2>Engagement</h2>
+        <div class="twoCol">
+          <div>
+            <div class="kpi">
+              <div class="value">1,057</div>
+              <div class="sub">Post engagements</div>
+            </div>
+            <div class="divider"></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <span class="tag"><span class="badge" style="background:var(--pink)"></span> Comments <strong>4</strong></span>
+              <span class="tag"><span class="badge" style="background:var(--blue)"></span> Shares <strong>2</strong></span>
+              <span class="tag"><span class="badge" style="background:var(--green)"></span> Cost per engagement <strong>€0.115</strong></span>
+            </div>
+            <p class="note" style="margin-top:10px">
+              Engagement rate is computed as engagements divided by reach.
+            </p>
+          </div>
+          <div>
+            <h2 style="margin-top:0">Engagement Rate</h2>
+            <div class="kpi">
+              <div class="value">10.44%</div>
+              <div class="sub">Engagements per reached user</div>
+            </div>
+            <div class="bar" style="margin-top:10px">
+              <div style="width:10.44%; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
+            </div>
+            <p class="note" style="margin-top:10px">
+              Calculation: 1,057 divided by 10,126.
+            </p>
+          </div>
+        </div>
+        <div class="accent cyan"></div>
+      </div>
+
+      <div class="card span-6">
+        <h2>Follower Growth</h2>
+        <div class="twoCol">
+          <div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <span class="tag"><span class="badge" style="background:var(--amber)"></span> Starting followers <strong>54</strong></span>
+              <span class="tag"><span class="badge" style="background:var(--cyan)"></span> Current followers <strong>413</strong></span>
+            </div>
+            <div class="divider"></div>
+            <div class="kpi">
+              <div class="value">359</div>
+              <div class="sub">Net new followers gained</div>
+            </div>
+            <p class="note">This uses 413 as the current rounded follower count.</p>
+          </div>
+          <div>
+            <h2 style="margin-top:0">Cost per New Follower</h2>
+            <div class="kpi">
+              <div class="value">€0.34</div>
+              <div class="sub">Spend divided by net new followers</div>
+            </div>
+            <div class="bar" style="margin-top:10px">
+              <div style="width:34%; background: linear-gradient(90deg, var(--amber), var(--pink));"></div>
+            </div>
+            <p class="note" style="margin-top:10px">
+              Calculation: €121.63 divided by 359.
+            </p>
+          </div>
+        </div>
+        <div class="accent amber"></div>
+      </div>
+
+      <div class="card span-12">
+        <h2>Ads Breakdown</h2>
+        <p class="note">
+          AD4 used 85.60% of budget and drove the majority of results and engagements.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Ad</th>
+              <th>Spend</th>
+              <th>Spend Share</th>
+              <th>Impressions</th>
+              <th>Reach</th>
+              <th>CTR all</th>
+              <th>Results</th>
+              <th>Post engagements</th>
+              <th>Cost per engagement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>AD4</strong> <span class="muted">Top performer</span></td>
+              <td>€104.11</td>
+              <td>
+                <div class="bar" title="85.60%">
+                  <div style="width:85.6%; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
+                </div>
+                <div class="small">85.60%</div>
+              </td>
+              <td>13,950</td>
+              <td>9,122</td>
+              <td>5.36%</td>
+              <td>671</td>
+              <td>904</td>
+              <td>€0.114</td>
+            </tr>
+            <tr>
+              <td><strong>AD1</strong></td>
+              <td>€10.34</td>
+              <td>
+                <div class="bar" title="8.50%">
+                  <div style="width:8.5%; background: linear-gradient(90deg, var(--amber), var(--pink));"></div>
+                </div>
+                <div class="small">8.50%</div>
+              </td>
+              <td>1,911</td>
+              <td>1,372</td>
+              <td>5.23%</td>
+              <td>72</td>
+              <td>91</td>
+              <td>€0.116</td>
+            </tr>
+            <tr>
+              <td><strong>AD5</strong></td>
+              <td>€6.76</td>
+              <td>
+                <div class="bar" title="5.56%">
+                  <div style="width:5.56%; background: linear-gradient(90deg, var(--green), var(--cyan));"></div>
+                </div>
+                <div class="small">5.56%</div>
+              </td>
+              <td>874</td>
+              <td>685</td>
+              <td>4.92%</td>
+              <td>36</td>
+              <td>60</td>
+              <td>€0.113</td>
+            </tr>
+            <tr>
+              <td><strong>AD3</strong></td>
+              <td>€0.21</td>
+              <td>
+                <div class="bar" title="0.17%">
+                  <div style="width:0.17%; background: linear-gradient(90deg, var(--red), var(--amber));"></div>
+                </div>
+                <div class="small">0.17%</div>
+              </td>
+              <td>36</td>
+              <td>35</td>
+              <td>5.56%</td>
+              <td>1</td>
+              <td>2</td>
+              <td>€0.105</td>
+            </tr>
+            <tr>
+              <td><strong>AD2</strong> <span class="muted">Insufficient delivery</span></td>
+              <td>€0.21</td>
+              <td>
+                <div class="bar" title="0.17%">
+                  <div style="width:0.17%; background: linear-gradient(90deg, var(--red), var(--pink));"></div>
+                </div>
+                <div class="small">0.17%</div>
+              </td>
+              <td>65</td>
+              <td>55</td>
+              <td>1.54%</td>
+              <td class="muted">Not available</td>
+              <td class="muted">Not available</td>
+              <td class="muted">Not available</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card span-7">
+        <h2>What these numbers mean</h2>
+        <div class="callout">
+          This was a top of funnel campaign optimized for profile visits and follower growth.
+          It is strong on reach, CTR, and engagement efficiency, but it does not yet measure purchases or revenue.
+        </div>
+        <ul class="list">
+          <li><strong>CAC</strong> and <strong>LTV</strong> are not available yet because this campaign does not track customer conversions.</li>
+          <li>To measure conversion rate and ROAS, we need a website or funnel event such as lead form submissions, bookings, or purchases.</li>
+          <li>Your target formula is spend one euro to get five euros or ideally fifty euros back, which requires revenue attribution.</li>
+        </ul>
+      </div>
+
+      <div class="card span-5">
+        <h2>Next actions for February</h2>
+        <ul class="list">
+          <li>Scale AD4, keep AD1 as backup creative.</li>
+          <li>Refresh one new creative monthly to avoid fatigue.</li>
+          <li>Set up conversion tracking, Meta Pixel and key events.</li>
+          <li>Add a monthly tab to track trends over time.</li>
+        </ul>
+        <div class="accent purple"></div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Data notes: Campaign and ad metrics from Meta exports for Jan 6 to Jan 31, 2026. Followers computed using Instagram profile snapshots from 54 to 413.</div>
+      <div class="small">You can host this as a single HTML file on GitHub Pages. No external libraries required.</div>
+    </footer>
+  </div>
+</body>
+</html>
