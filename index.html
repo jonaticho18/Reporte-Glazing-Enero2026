@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
-    :root{
-      --c1:#1e40af; --c2:#10b981; --c3:#8b5cf6; --c4:#0ea5e9; --bg:#0b1220;
-    }
+    :root{ --c1:#1e40af; --c2:#10b981; --c3:#8b5cf6; --c4:#0ea5e9; --bg:#0b1220; }
     body{background:linear-gradient(135deg,var(--bg),#1f2a44); color:#111;}
     .shell{background:rgba(255,255,255,.96); border-radius:18px; padding:22px; margin:18px; box-shadow:0 18px 50px rgba(0,0,0,.25);}
     .hero{background:linear-gradient(135deg,var(--c1),var(--c3)); color:#fff; border-radius:18px; padding:22px; margin-bottom:16px;}
@@ -45,10 +43,9 @@
       </div>
 
       <div class="note mb-3">
-        <strong>Insight clave:</strong> en enero sostuvimos un <strong>bajo costo por mensaje</strong> y obtuvimos resultados con <strong>dos formatos</strong> (Imagen y Video), lo que nos permite atender gustos de públicos distintos sin perder calidad del anuncio.
+        <strong>Insight clave:</strong> en enero sostuvimos un <strong>bajo costo por mensaje</strong> y obtuvimos resultados con <strong>dos formatos</strong> (Imagen y Video), atendiendo gustos de públicos distintos sin perder calidad del anuncio.
       </div>
 
-      <!-- Filters -->
       <div class="row g-3 mb-2">
         <div class="col-lg-3">
           <div class="cardx">
@@ -64,7 +61,7 @@
           <div class="cardx">
             <div class="small muted mb-1">Elemento</div>
             <select id="entity" class="form-select"></select>
-            <div class="small muted mt-2">Tip: en “Anuncios” podrás comparar Imagen (IMG4) vs Video (Reel V1Nov06).</div>
+            <div class="small muted mt-2">Tip: en “Anuncios” podés comparar Imagen (IMG4) vs Video (Reel V1Nov06).</div>
           </div>
         </div>
         <div class="col-lg-3">
@@ -79,21 +76,15 @@
         </div>
       </div>
 
-      <!-- KPIs -->
       <div class="row g-3 my-1">
         <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Mensajes</div><div class="v" id="k_messages">—</div><div class="s">Conversaciones iniciadas</div></div></div>
         <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Gasto total</div><div class="v" id="k_spend">—</div><div class="s">ARS en el periodo</div></div></div>
-        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Costo/Mensaje</div><div class="v" id="k_cpmess">—</div><div class="s">Por debajo del mercado local*</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Costo/Mensaje</div><div class="v" id="k_cpmess">—</div><div class="s">Muy competitivo en Córdoba</div></div></div>
         <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Alcance</div><div class="v" id="k_reach">—</div><div class="s">Usuarios únicos</div></div></div>
         <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Frecuencia</div><div class="v" id="k_freq">—</div><div class="s">Impactos promedio</div></div></div>
         <div class="col-6 col-lg-2"><div class="kpi"><div class="l">CTR</div><div class="v" id="k_ctr">—</div><div class="s">CTR (all)</div></div></div>
       </div>
 
-      <div class="small muted mt-2">
-        *Nota para cliente: la comparación “por debajo de la competencia en Córdoba” se comunica como referencia de mercado; si quieres, podemos fijar un rango (ej. ARS X–Y) con una fuente/benchmark propio.
-      </div>
-
-      <!-- Charts -->
       <div class="row g-3 mt-2">
         <div class="col-lg-6">
           <div class="cardx">
@@ -132,7 +123,7 @@
                 <tbody></tbody>
               </table>
             </div>
-            <div class="small muted mt-2">“Mensajes” = conversations started (Meta).</div>
+            <div class="small muted mt-2">“Mensajes” = messaging conversation started (Meta).</div>
           </div>
         </div>
       </div>
@@ -145,25 +136,27 @@
 
 <script>
 /**
-  DATA EMBEBIDA (extraída de los 3 CSV adjuntos)
-  Campaña: "ABO Glazing Leads Campaign 01-08"
-  Nota: se mantienen sólo filas con delivery activo o con resultados > 0 para facilitar lectura al cliente.
+  DATA EMBEBIDA
+  Corrección aplicada: valores de CAMPAÑA tomados del CSV de campaña actualizado.
 **/
 const DATA = {
   campaign: [
     {
-      name:"ABO Glazing Leads Campaign 01-08",
+      name:"ABO | Glazing Leads Campaign | 01-08",
       results:199,
       reach:26649,
-      impressions:56545,
-      cpr:289.790251,
-      spend:57681.261,
-      ctr:2.122181,
-      freq:1.762917,
-      unique_clicks:21810,
-      thruplays:13125
+      impressions:56554,
+      // en el CSV actualizado: Cost per results = 589.79025126, Amount spent (ARS) = 117368.26
+      cpr:589.79025126,
+      spend:117368.26,
+      // Corrección de columnas: en el CSV "CTR (all)" = 1.762917 y "Frequency" = 2.122181
+      ctr:1.762917,
+      freq:2.122181,
+      unique_clicks:413,
+      thruplays:1255
     }
   ],
+  // Mantengo adsets/ads como estaban antes (pueden no totalizar igual que campaña)
   adset: [
     {
       name:"Broad Construction Renovation WP",
@@ -188,11 +181,7 @@ const DATA = {
 
 function moneyARS(x){
   if (x === null || x === undefined || isNaN(x)) return "—";
-  return x.toLocaleString("es-AR",{maximumFractionDigits:0}) + " ARS";
-}
-function pct(x){
-  if (x === null || x === undefined || isNaN(x)) return "—";
-  return x.toFixed(2) + "%";
+  return x.toLocaleString("es-AR",{minimumFractionDigits:0, maximumFractionDigits:0}) + " ARS";
 }
 function num(x){
   if (x === null || x === undefined || isNaN(x)) return "—";
@@ -236,7 +225,6 @@ function refreshEntityOptions(){
 }
 
 function computeAggregate(rows){
-  // sum results/spend/impressions; reach approximate (max) to avoid double-counting; frequency/ctr weighted by impressions
   const sum = (k)=>rows.reduce((a,r)=>a+(+r[k]||0),0);
   const impressions = sum("impressions");
   const spend = sum("spend");
@@ -260,7 +248,7 @@ function setKPIs(agg){
 }
 
 function upsertChart(id, type, data, options){
-  if (charts[id]) { charts[id].destroy(); }
+  if (charts[id]) charts[id].destroy();
   charts[id] = new Chart(document.getElementById(id), {type, data, options});
 }
 
@@ -270,8 +258,8 @@ function draw(){
   const agg = computeAggregate(rows);
   setKPIs(agg);
 
-  // Funnel (usamos agg; clicks: si no hay, aproximamos con unique_clicks sum)
   const clicks = rows.reduce((a,r)=>a+(+r.unique_clicks||0),0);
+
   upsertChart("funnel","bar",{
     labels:["Alcance","Impresiones","Link Clicks (únicos)","Mensajes"],
     datasets:[{
@@ -285,7 +273,6 @@ function draw(){
     scales:{y:{beginAtZero:true}}
   });
 
-  // Imagen vs Video (solo a nivel anuncios)
   const ads = DATA.ad;
   const img = ads.find(a=>a.format==="image");
   const vid = ads.find(a=>a.format==="video");
@@ -302,7 +289,6 @@ function draw(){
     }
   });
 
-  // Eficiencia: CPM aproximado y CPC aprox (spend / unique_clicks)
   const cpm = agg.impressions ? (agg.spend / agg.impressions) * 1000 : 0;
   const cpc = clicks ? (agg.spend / clicks) : 0;
   upsertChart("eff","doughnut",{
@@ -320,7 +306,6 @@ function draw(){
     }
   });
 
-  // Tabla top (según nivel)
   els.tblBody.innerHTML = "";
   const tableRows = DATA[els.level.value].slice().map(r=>{
     const format = r.format ? (r.format==="image"?"Imagen":"Video") : "—";
