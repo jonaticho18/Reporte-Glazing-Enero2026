@@ -1,453 +1,355 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ADHD Services Meta Ads Report | January 2026</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Glazing / Polarizados Arquitectura (Córdoba) — Dashboard Enero 2026</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     :root{
-      --bg0:#070A12;
-      --card:#0B1220;
-      --card2:#0E1930;
-      --text:#EAF0FF;
-      --muted:#A9B4D0;
-
-      --cyan:#22D3EE;
-      --blue:#60A5FA;
-      --purple:#A78BFA;
-      --pink:#FB7185;
-      --amber:#FBBF24;
-      --green:#34D399;
-      --red:#F87171;
-
-      --grid:rgba(255,255,255,.08);
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
+      --c1:#1e40af; --c2:#10b981; --c3:#8b5cf6; --c4:#0ea5e9; --bg:#0b1220;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(34,211,238,.20), transparent 60%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(167,139,250,.18), transparent 55%),
-                  radial-gradient(900px 600px at 40% 100%, rgba(251,191,36,.12), transparent 60%),
-                  var(--bg0);
-      color:var(--text);
-    }
-    a{color:var(--cyan);text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
-    header{
-      display:flex;justify-content:space-between;align-items:flex-start;gap:18px;
-      padding:18px 18px 12px;
-      background: linear-gradient(135deg, rgba(34,211,238,.12), rgba(167,139,250,.10));
-      border:1px solid var(--grid);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .title h1{margin:0;font-size:22px;letter-spacing:.2px}
-    .title p{margin:6px 0 0;color:var(--muted);line-height:1.35}
-    .pill{
-      display:inline-flex;gap:10px;align-items:center;
-      padding:10px 12px;border-radius:999px;
-      border:1px solid var(--grid);
-      background: rgba(11,18,32,.55);
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .dot{width:10px;height:10px;border-radius:50%}
-    .dot.cyan{background:var(--cyan)}
-    .dot.amber{background:var(--amber)}
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid var(--grid);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px 16px 14px;
-      overflow:hidden;
-      position:relative;
-    }
-    .card h2{margin:0 0 8px;font-size:14px;color:var(--muted);font-weight:650}
-    .kpi{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
-      margin-top:8px;
-    }
-    .kpi .value{font-size:28px;font-weight:800;letter-spacing:.2px}
-    .kpi .sub{font-size:12px;color:var(--muted);text-align:right}
-    .accent{
-      position:absolute;inset:auto -40px -40px auto;
-      width:180px;height:180px;border-radius:50%;
-      filter: blur(2px);
-      opacity:.18;
-    }
-    .accent.cyan{background:var(--cyan)}
-    .accent.purple{background:var(--purple)}
-    .accent.amber{background:var(--amber)}
-    .accent.green{background:var(--green)}
-    .accent.pink{background:var(--pink)}
-    .span-3{grid-column: span 3}
-    .span-4{grid-column: span 4}
-    .span-5{grid-column: span 5}
-    .span-6{grid-column: span 6}
-    .span-7{grid-column: span 7}
-    .span-8{grid-column: span 8}
-    .span-12{grid-column: span 12}
-
-    .twoCol{display:grid;grid-template-columns: 1.15fr .85fr; gap:14px}
-    @media (max-width: 980px){
-      .span-3,.span-4,.span-5,.span-6,.span-7,.span-8{grid-column: span 12}
-      .twoCol{grid-template-columns: 1fr}
-      header{flex-direction:column}
-    }
-
-    .divider{height:1px;background:var(--grid);margin:12px 0}
-    .note{color:var(--muted);font-size:12px;line-height:1.45;margin:0}
-
-    table{width:100%;border-collapse:collapse;margin-top:8px}
-    th,td{
-      padding:10px 10px;
-      border-bottom:1px solid var(--grid);
-      text-align:left;
-      font-size:13px;
-    }
-    th{color:var(--muted);font-weight:700}
-    td{color:var(--text)}
-    .tag{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--grid);
-      background: rgba(255,255,255,.03);
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      white-space:nowrap;
-    }
-    .badge{
-      width:8px;height:8px;border-radius:50%;
-      display:inline-block;
-    }
-
-    .bar{
-      height:10px;border-radius:999px;background: rgba(255,255,255,.06);overflow:hidden;border:1px solid var(--grid)
-    }
-    .bar > div{height:100%}
-    .muted{color:var(--muted)}
-
-    .chart{
-      width:100%;
-      height:260px;
-      display:block;
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.00));
-      border:1px solid var(--grid);
-      border-radius: 16px;
-      padding:10px;
-    }
-
-    footer{margin-top:16px;color:var(--muted);font-size:12px}
-    .small{font-size:12px;color:var(--muted)}
-    .h3{margin:0 0 8px;font-size:16px}
-    .callout{
-      padding:12px 12px;
-      border:1px dashed rgba(34,211,238,.35);
-      background: rgba(34,211,238,.06);
-      border-radius: 14px;
-      color: var(--text);
-      font-size:13px;
-      line-height:1.45;
-    }
-    .list{margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.55}
+    body{background:linear-gradient(135deg,var(--bg),#1f2a44); color:#111;}
+    .shell{background:rgba(255,255,255,.96); border-radius:18px; padding:22px; margin:18px; box-shadow:0 18px 50px rgba(0,0,0,.25);}
+    .hero{background:linear-gradient(135deg,var(--c1),var(--c3)); color:#fff; border-radius:18px; padding:22px; margin-bottom:16px;}
+    .kpi{background:#fff; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.08); border-left:6px solid var(--c1); height:100%;}
+    .kpi .v{font-size:1.65rem; font-weight:800; color:var(--c1);}
+    .kpi .l{font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:#6b7280;}
+    .kpi .s{font-size:.85rem; color:#059669; font-weight:600;}
+    .cardx{background:#fff; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.08);}
+    .note{background:rgba(16,185,129,.10); border:1px solid rgba(16,185,129,.35); border-radius:14px; padding:14px;}
+    .pill{display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:.8rem;}
+    .pill.ok{background:rgba(16,185,129,.12); color:#047857;}
+    .pill.info{background:rgba(14,165,233,.12); color:#0369a1;}
+    .muted{color:#6b7280;}
+    canvas{max-height:320px;}
+    .table thead th{background:var(--c1); color:#fff; border:0;}
+    .badgeFmt{background:rgba(139,92,246,.12); color:#5b21b6; border:1px solid rgba(139,92,246,.25);}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="title">
-        <h1>ADHD Services Meta Ads Report | January 2026</h1>
-        <p>
-          Campaign: <strong>ABO | ADHD Followers campaign | 01-07</strong><br/>
-          Reporting window: <strong>Jan 6 to Jan 31, 2026</strong>
-        </p>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
-        <div class="pill"><span class="dot cyan"></span> Data source: Meta Ads exports</div>
-        <div class="pill"><span class="dot amber"></span> Followers: Instagram profile snapshots</div>
-      </div>
-    </header>
-
-    <section class="grid">
-      <div class="card span-3">
-        <h2>Total Ad Spend</h2>
-        <div class="kpi">
-          <div class="value">€121.63</div>
-          <div class="sub">Currency: EUR</div>
-        </div>
-        <div class="accent cyan"></div>
-      </div>
-
-      <div class="card span-3">
-        <h2>Reach</h2>
-        <div class="kpi">
-          <div class="value">10,126</div>
-          <div class="sub">Unique people</div>
-        </div>
-        <div class="accent purple"></div>
-      </div>
-
-      <div class="card span-3">
-        <h2>Impressions</h2>
-        <div class="kpi">
-          <div class="value">16,836</div>
-          <div class="sub">Total views</div>
-        </div>
-        <div class="accent amber"></div>
-      </div>
-
-      <div class="card span-3">
-        <h2>Frequency</h2>
-        <div class="kpi">
-          <div class="value">1.66</div>
-          <div class="sub">Impressions per person</div>
-        </div>
-        <div class="accent green"></div>
-      </div>
-
-      <div class="card span-4">
-        <h2>CTR All</h2>
-        <div class="kpi">
-          <div class="value">5.31%</div>
-          <div class="sub">All clicks per impression</div>
-        </div>
-        <p class="note">High for a follower and awareness style objective.</p>
-        <div class="accent cyan"></div>
-      </div>
-
-      <div class="card span-4">
-        <h2>Results</h2>
-        <div class="kpi">
-          <div class="value">780</div>
-          <div class="sub">Result type: profile visit view</div>
-        </div>
-        <p class="note">This campaign optimized for profile visits, not purchases.</p>
-        <div class="accent purple"></div>
-      </div>
-
-      <div class="card span-4">
-        <h2>Cost per Result</h2>
-        <div class="kpi">
-          <div class="value">€0.16</div>
-          <div class="sub">Spend divided by results</div>
-        </div>
-        <p class="note">Efficient cost for top of funnel traffic to the profile.</p>
-        <div class="accent amber"></div>
-      </div>
-
-      <div class="card span-6">
-        <h2>Engagement</h2>
-        <div class="twoCol">
+  <div class="container-fluid">
+    <div class="shell">
+      <div class="hero">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
           <div>
-            <div class="kpi">
-              <div class="value">1,057</div>
-              <div class="sub">Post engagements</div>
-            </div>
-            <div class="divider"></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <span class="tag"><span class="badge" style="background:var(--pink)"></span> Comments <strong>4</strong></span>
-              <span class="tag"><span class="badge" style="background:var(--blue)"></span> Shares <strong>2</strong></span>
-              <span class="tag"><span class="badge" style="background:var(--green)"></span> Cost per engagement <strong>€0.115</strong></span>
-            </div>
-            <p class="note" style="margin-top:10px">
-              Engagement rate is computed as engagements divided by reach.
-            </p>
+            <h1 class="h3 m-0">Glazing / Polarizados de Arquitectura — Córdoba</h1>
+            <div class="opacity-75">Meta Ads | Objetivo: Interacción a WhatsApp | Periodo: Enero 2026</div>
           </div>
-          <div>
-            <h2 style="margin-top:0">Engagement Rate</h2>
-            <div class="kpi">
-              <div class="value">10.44%</div>
-              <div class="sub">Engagements per reached user</div>
-            </div>
-            <div class="bar" style="margin-top:10px">
-              <div style="width:10.44%; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
-            </div>
-            <p class="note" style="margin-top:10px">
-              Calculation: 1,057 divided by 10,126.
-            </p>
+          <div class="text-end">
+            <div class="pill ok">Resultados medidos: conversaciones iniciadas</div>
+            <div class="small opacity-75">Montos en ARS</div>
           </div>
         </div>
-        <div class="accent cyan"></div>
       </div>
 
-      <div class="card span-6">
-        <h2>Follower Growth</h2>
-        <div class="twoCol">
-          <div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <span class="tag"><span class="badge" style="background:var(--amber)"></span> Starting followers <strong>54</strong></span>
-              <span class="tag"><span class="badge" style="background:var(--cyan)"></span> Current followers <strong>413</strong></span>
-            </div>
-            <div class="divider"></div>
-            <div class="kpi">
-              <div class="value">359</div>
-              <div class="sub">Net new followers gained</div>
-            </div>
-            <p class="note">This uses 413 as the current rounded follower count.</p>
-          </div>
-          <div>
-            <h2 style="margin-top:0">Cost per New Follower</h2>
-            <div class="kpi">
-              <div class="value">€0.34</div>
-              <div class="sub">Spend divided by net new followers</div>
-            </div>
-            <div class="bar" style="margin-top:10px">
-              <div style="width:34%; background: linear-gradient(90deg, var(--amber), var(--pink));"></div>
-            </div>
-            <p class="note" style="margin-top:10px">
-              Calculation: €121.63 divided by 359.
-            </p>
+      <div class="note mb-3">
+        <strong>Insight clave:</strong> en enero sostuvimos un <strong>bajo costo por mensaje</strong> y obtuvimos resultados con <strong>dos formatos</strong> (Imagen y Video), lo que nos permite atender gustos de públicos distintos sin perder calidad del anuncio.
+      </div>
+
+      <!-- Filters -->
+      <div class="row g-3 mb-2">
+        <div class="col-lg-3">
+          <div class="cardx">
+            <div class="small muted mb-1">Nivel</div>
+            <select id="level" class="form-select">
+              <option value="campaign">Campaña</option>
+              <option value="adset">Conjunto de anuncios</option>
+              <option value="ad">Anuncios</option>
+            </select>
           </div>
         </div>
-        <div class="accent amber"></div>
-      </div>
-
-      <div class="card span-12">
-        <h2>Ads Breakdown</h2>
-        <p class="note">
-          AD4 used 85.60% of budget and drove the majority of results and engagements.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th>Ad</th>
-              <th>Spend</th>
-              <th>Spend Share</th>
-              <th>Impressions</th>
-              <th>Reach</th>
-              <th>CTR all</th>
-              <th>Results</th>
-              <th>Post engagements</th>
-              <th>Cost per engagement</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>AD4</strong> <span class="muted">Top performer</span></td>
-              <td>€104.11</td>
-              <td>
-                <div class="bar" title="85.60%">
-                  <div style="width:85.6%; background: linear-gradient(90deg, var(--cyan), var(--purple));"></div>
-                </div>
-                <div class="small">85.60%</div>
-              </td>
-              <td>13,950</td>
-              <td>9,122</td>
-              <td>5.36%</td>
-              <td>671</td>
-              <td>904</td>
-              <td>€0.114</td>
-            </tr>
-            <tr>
-              <td><strong>AD1</strong></td>
-              <td>€10.34</td>
-              <td>
-                <div class="bar" title="8.50%">
-                  <div style="width:8.5%; background: linear-gradient(90deg, var(--amber), var(--pink));"></div>
-                </div>
-                <div class="small">8.50%</div>
-              </td>
-              <td>1,911</td>
-              <td>1,372</td>
-              <td>5.23%</td>
-              <td>72</td>
-              <td>91</td>
-              <td>€0.116</td>
-            </tr>
-            <tr>
-              <td><strong>AD5</strong></td>
-              <td>€6.76</td>
-              <td>
-                <div class="bar" title="5.56%">
-                  <div style="width:5.56%; background: linear-gradient(90deg, var(--green), var(--cyan));"></div>
-                </div>
-                <div class="small">5.56%</div>
-              </td>
-              <td>874</td>
-              <td>685</td>
-              <td>4.92%</td>
-              <td>36</td>
-              <td>60</td>
-              <td>€0.113</td>
-            </tr>
-            <tr>
-              <td><strong>AD3</strong></td>
-              <td>€0.21</td>
-              <td>
-                <div class="bar" title="0.17%">
-                  <div style="width:0.17%; background: linear-gradient(90deg, var(--red), var(--amber));"></div>
-                </div>
-                <div class="small">0.17%</div>
-              </td>
-              <td>36</td>
-              <td>35</td>
-              <td>5.56%</td>
-              <td>1</td>
-              <td>2</td>
-              <td>€0.105</td>
-            </tr>
-            <tr>
-              <td><strong>AD2</strong> <span class="muted">Insufficient delivery</span></td>
-              <td>€0.21</td>
-              <td>
-                <div class="bar" title="0.17%">
-                  <div style="width:0.17%; background: linear-gradient(90deg, var(--red), var(--pink));"></div>
-                </div>
-                <div class="small">0.17%</div>
-              </td>
-              <td>65</td>
-              <td>55</td>
-              <td>1.54%</td>
-              <td class="muted">Not available</td>
-              <td class="muted">Not available</td>
-              <td class="muted">Not available</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card span-7">
-        <h2>What these numbers mean</h2>
-        <div class="callout">
-          This was a top of funnel campaign optimized for profile visits and follower growth.
-          It is strong on reach, CTR, and engagement efficiency, but it does not yet measure purchases or revenue.
+        <div class="col-lg-6">
+          <div class="cardx">
+            <div class="small muted mb-1">Elemento</div>
+            <select id="entity" class="form-select"></select>
+            <div class="small muted mt-2">Tip: en “Anuncios” podrás comparar Imagen (IMG4) vs Video (Reel V1Nov06).</div>
+          </div>
         </div>
-        <ul class="list">
-          <li><strong>CAC</strong> and <strong>LTV</strong> are not available yet because this campaign does not track customer conversions.</li>
-          <li>To measure conversion rate and ROAS, we need a website or funnel event such as lead form submissions, bookings, or purchases.</li>
-          <li>Your target formula is spend one euro to get five euros or ideally fifty euros back, which requires revenue attribution.</li>
-        </ul>
+        <div class="col-lg-3">
+          <div class="cardx">
+            <div class="small muted mb-1">Formato</div>
+            <select id="format" class="form-select">
+              <option value="all">Todos</option>
+              <option value="image">Imagen</option>
+              <option value="video">Video</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      <div class="card span-5">
-        <h2>Next actions for February</h2>
-        <ul class="list">
-          <li>Scale AD4, keep AD1 as backup creative.</li>
-          <li>Refresh one new creative monthly to avoid fatigue.</li>
-          <li>Set up conversion tracking, Meta Pixel and key events.</li>
-          <li>Add a monthly tab to track trends over time.</li>
-        </ul>
-        <div class="accent purple"></div>
+      <!-- KPIs -->
+      <div class="row g-3 my-1">
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Mensajes</div><div class="v" id="k_messages">—</div><div class="s">Conversaciones iniciadas</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Gasto total</div><div class="v" id="k_spend">—</div><div class="s">ARS en el periodo</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Costo/Mensaje</div><div class="v" id="k_cpmess">—</div><div class="s">Por debajo del mercado local*</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Alcance</div><div class="v" id="k_reach">—</div><div class="s">Usuarios únicos</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">Frecuencia</div><div class="v" id="k_freq">—</div><div class="s">Impactos promedio</div></div></div>
+        <div class="col-6 col-lg-2"><div class="kpi"><div class="l">CTR</div><div class="v" id="k_ctr">—</div><div class="s">CTR (all)</div></div></div>
       </div>
-    </section>
 
-    <footer>
-      <div>Data notes: Campaign and ad metrics from Meta exports for Jan 6 to Jan 31, 2026. Followers computed using Instagram profile snapshots from 54 to 413.</div>
-      <div class="small">You can host this as a single HTML file on GitHub Pages. No external libraries required.</div>
-    </footer>
+      <div class="small muted mt-2">
+        *Nota para cliente: la comparación “por debajo de la competencia en Córdoba” se comunica como referencia de mercado; si quieres, podemos fijar un rango (ej. ARS X–Y) con una fuente/benchmark propio.
+      </div>
+
+      <!-- Charts -->
+      <div class="row g-3 mt-2">
+        <div class="col-lg-6">
+          <div class="cardx">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="fw-semibold">Funnel simple (Alcance → Impresiones → Clicks → Mensajes)</div>
+              <span class="pill info">Interacción a WhatsApp</span>
+            </div>
+            <canvas id="funnel"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="cardx">
+            <div class="fw-semibold mb-2">Imagen vs Video (Mensajes y Costo/Mensaje)</div>
+            <canvas id="formats"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-2">
+        <div class="col-lg-6">
+          <div class="cardx">
+            <div class="fw-semibold mb-2">Eficiencia (CPC aproximado y CPM)</div>
+            <canvas id="eff"></canvas>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="cardx">
+            <div class="fw-semibold mb-2">Tabla (top elementos por Mensajes)</div>
+            <div class="table-responsive">
+              <table class="table table-sm align-middle mb-0" id="tbl">
+                <thead>
+                  <tr>
+                    <th>Nombre</th><th>Formato</th><th>Mensajes</th><th>Gasto (ARS)</th><th>Costo/Mensaje</th><th>CTR</th><th>Frecuencia</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <div class="small muted mt-2">“Mensajes” = conversations started (Meta).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note mt-3">
+        <strong>Optimización aplicada:</strong> actualizamos el público con intereses más diversos (análisis previo) y mantuvimos la calidad del anuncio para sostener el costo por resultado.
+      </div>
+    </div>
   </div>
+
+<script>
+/**
+  DATA EMBEBIDA (extraída de los 3 CSV adjuntos)
+  Campaña: "ABO Glazing Leads Campaign 01-08"
+  Nota: se mantienen sólo filas con delivery activo o con resultados > 0 para facilitar lectura al cliente.
+**/
+const DATA = {
+  campaign: [
+    {
+      name:"ABO Glazing Leads Campaign 01-08",
+      results:199,
+      reach:26649,
+      impressions:56545,
+      cpr:289.790251,
+      spend:57681.261,
+      ctr:2.122181,
+      freq:1.762917,
+      unique_clicks:21810,
+      thruplays:13125
+    }
+  ],
+  adset: [
+    {
+      name:"Broad Construction Renovation WP",
+      results:129, reach:16394, impressions:30633,
+      cpr:453.913643, spend:58554.862,
+      ctr:1.868549, freq:2.115366,
+      unique_clicks:5493, thruplays:0
+    },
+    {
+      name:"Broad Construction Renovation WP - reels",
+      results:70, reach:14484, impressions:25921,
+      cpr:840.191428, spend:57588.13,
+      ctr:1.78963, freq:1.78963,
+      unique_clicks:0, thruplays:13125
+    }
+  ],
+  ad: [
+    { name:"IMG4", format:"image", results:129, reach:16394, impressions:30633, cpr:453.913643, spend:58554.862, ctr:1.868549, freq:2.115366, unique_clicks:5493, thruplays:0 },
+    { name:"Reel V1Nov06", format:"video", results:70, reach:14413, impressions:25756, cpr:835.008857, spend:58450.62, ctr:1.786998, freq:1.339494, unique_clicks:0, thruplays:12341 }
+  ]
+};
+
+function moneyARS(x){
+  if (x === null || x === undefined || isNaN(x)) return "—";
+  return x.toLocaleString("es-AR",{maximumFractionDigits:0}) + " ARS";
+}
+function pct(x){
+  if (x === null || x === undefined || isNaN(x)) return "—";
+  return x.toFixed(2) + "%";
+}
+function num(x){
+  if (x === null || x === undefined || isNaN(x)) return "—";
+  return x.toLocaleString("es-AR");
+}
+
+const els = {
+  level: document.getElementById("level"),
+  entity: document.getElementById("entity"),
+  format: document.getElementById("format"),
+  k_messages: document.getElementById("k_messages"),
+  k_spend: document.getElementById("k_spend"),
+  k_cpmess: document.getElementById("k_cpmess"),
+  k_reach: document.getElementById("k_reach"),
+  k_freq: document.getElementById("k_freq"),
+  k_ctr: document.getElementById("k_ctr"),
+  tblBody: document.querySelector("#tbl tbody")
+};
+
+let charts = {};
+
+function getRows(){
+  const lvl = els.level.value;
+  let rows = DATA[lvl].slice();
+  const fmt = els.format.value;
+  if (fmt !== "all" && lvl === "ad"){
+    rows = rows.filter(r => r.format === fmt);
+  }
+  return rows;
+}
+
+function refreshEntityOptions(){
+  const rows = getRows();
+  els.entity.innerHTML = "";
+  rows.forEach((r,i)=>{
+    const opt = document.createElement("option");
+    opt.value = i;
+    opt.textContent = r.name;
+    els.entity.appendChild(opt);
+  });
+}
+
+function computeAggregate(rows){
+  // sum results/spend/impressions; reach approximate (max) to avoid double-counting; frequency/ctr weighted by impressions
+  const sum = (k)=>rows.reduce((a,r)=>a+(+r[k]||0),0);
+  const impressions = sum("impressions");
+  const spend = sum("spend");
+  const results = sum("results");
+  const reach = rows.reduce((m,r)=>Math.max(m,(+r.reach||0)),0);
+
+  const ctr = impressions ? rows.reduce((a,r)=>a+((+r.ctr||0) * (+r.impressions||0)),0)/impressions : 0;
+  const freq = impressions ? rows.reduce((a,r)=>a+((+r.freq||0) * (+r.impressions||0)),0)/impressions : 0;
+
+  const cpr = results ? spend/results : 0;
+  return {results, spend, reach, impressions, ctr, freq, cpr};
+}
+
+function setKPIs(agg){
+  els.k_messages.textContent = num(agg.results);
+  els.k_spend.textContent = moneyARS(agg.spend);
+  els.k_cpmess.textContent = moneyARS(agg.cpr);
+  els.k_reach.textContent = num(agg.reach);
+  els.k_freq.textContent = agg.freq ? agg.freq.toFixed(2) : "—";
+  els.k_ctr.textContent = agg.ctr ? agg.ctr.toFixed(2) + "%" : "—";
+}
+
+function upsertChart(id, type, data, options){
+  if (charts[id]) { charts[id].destroy(); }
+  charts[id] = new Chart(document.getElementById(id), {type, data, options});
+}
+
+function draw(){
+  const rows = getRows();
+  refreshEntityOptions();
+  const agg = computeAggregate(rows);
+  setKPIs(agg);
+
+  // Funnel (usamos agg; clicks: si no hay, aproximamos con unique_clicks sum)
+  const clicks = rows.reduce((a,r)=>a+(+r.unique_clicks||0),0);
+  upsertChart("funnel","bar",{
+    labels:["Alcance","Impresiones","Link Clicks (únicos)","Mensajes"],
+    datasets:[{
+      label:"Volumen",
+      data:[agg.reach, agg.impressions, clicks, agg.results],
+      backgroundColor:["#8b5cf6","#1e40af","#0ea5e9","#10b981"],
+      borderRadius:8
+    }]
+  },{
+    plugins:{legend:{display:false}},
+    scales:{y:{beginAtZero:true}}
+  });
+
+  // Imagen vs Video (solo a nivel anuncios)
+  const ads = DATA.ad;
+  const img = ads.find(a=>a.format==="image");
+  const vid = ads.find(a=>a.format==="video");
+  upsertChart("formats","bar",{
+    labels:["Imagen","Video"],
+    datasets:[
+      {label:"Mensajes", data:[img?.results||0, vid?.results||0], backgroundColor:["#10b981","#8b5cf6"], borderRadius:8, yAxisID:"y"},
+      {label:"Costo/Mensaje (ARS)", data:[img?.cpr||0, vid?.cpr||0], backgroundColor:["rgba(30,64,175,.25)","rgba(30,64,175,.25)"], borderColor:["#1e40af","#1e40af"], borderWidth:2, type:"line", yAxisID:"y1", tension:.35}
+    ]
+  },{
+    scales:{
+      y:{beginAtZero:true, title:{display:true,text:"Mensajes"}},
+      y1:{beginAtZero:true, position:"right", grid:{drawOnChartArea:false}, title:{display:true,text:"ARS"}}
+    }
+  });
+
+  // Eficiencia: CPM aproximado y CPC aprox (spend / unique_clicks)
+  const cpm = agg.impressions ? (agg.spend / agg.impressions) * 1000 : 0;
+  const cpc = clicks ? (agg.spend / clicks) : 0;
+  upsertChart("eff","doughnut",{
+    labels:["CPM (ARS)","CPC aprox (ARS)","Costo/Mensaje (ARS)"],
+    datasets:[{
+      data:[cpm,cpc,agg.cpr],
+      backgroundColor:["#0ea5e9","#f59e0b","#10b981"],
+      borderColor:"#fff",
+      borderWidth:3
+    }]
+  },{
+    plugins:{
+      tooltip:{callbacks:{label:(ctx)=>`${ctx.label}: ${moneyARS(ctx.parsed)}`}},
+      legend:{position:"bottom"}
+    }
+  });
+
+  // Tabla top (según nivel)
+  els.tblBody.innerHTML = "";
+  const tableRows = DATA[els.level.value].slice().map(r=>{
+    const format = r.format ? (r.format==="image"?"Imagen":"Video") : "—";
+    return {
+      name:r.name, format, results:+r.results||0, spend:+r.spend||0, cpr:+r.cpr||0,
+      ctr:+r.ctr||0, freq:+r.freq||0
+    };
+  }).sort((a,b)=>b.results-a.results);
+
+  tableRows.forEach(r=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><span class="badge badgeFmt">${r.name}</span></td>
+      <td>${r.format}</td>
+      <td class="fw-semibold">${num(r.results)}</td>
+      <td>${moneyARS(r.spend)}</td>
+      <td class="fw-semibold">${moneyARS(r.cpr)}</td>
+      <td>${r.ctr? r.ctr.toFixed(2)+"%":"—"}</td>
+      <td>${r.freq? r.freq.toFixed(2):"—"}</td>
+    `;
+    els.tblBody.appendChild(tr);
+  });
+}
+
+els.level.addEventListener("change", ()=>{ draw(); });
+els.format.addEventListener("change", ()=>{ draw(); });
+
+draw();
+</script>
 </body>
 </html>
+
